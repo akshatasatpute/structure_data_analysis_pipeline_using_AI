@@ -5,18 +5,22 @@ import os
 import google.generativeai as genai
 from dotenv import load_dotenv
 
-'''
-load_dotenv(r"C:\Users\User\Downloads\gemini_ai\api.env")
-API_KEY = os.getenv("GOOGLE_API_KEY")
-'''
+
+#oad_dotenv(r"C:\Users\User\Downloads\gemini_ai\api.env")
+#PI_KEY = os.getenv("GOOGLE_API_KEY")
+
 
 #Prefer Streamlit secrets if running on Streamlit Cloud
 API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 genai.configure(api_key=API_KEY)
+
+#Get list of gemini models
+
 #results = genai.list_models()
 #for m in results:
     #print(m.name)
+
 # --------------------------------------
 # Configure Gemini
 # --------------------------------------
