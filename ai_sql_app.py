@@ -38,13 +38,7 @@ def ask_gemini_for_sql(model, question, columns, table_name="data"):
     created from a CSV file. You MUST respond with ONLY a single valid SQLite SQL query
     that can be executed directly, and NOTHING else.
 
-    INTERNAL STEPS (DO NOT REVEAL TO THE USER):
-    - Think through at least 3 possible SQL query options.
-    - Compare them for correctness, efficiency, and performance.
-    - Select the single most optimized SQL query.
-    - DO NOT show your reasoning, DO NOT output analysis, DO NOT output candidates.
-
-    OUTPUT RULES:
+    RULES:
     - Output ONLY the final optimized SQL query.
     - Do NOT include explanations, comments, markdown, backticks, or extra text.
     - The output must begin with the keyword SELECT.
@@ -135,8 +129,7 @@ if uploaded:
             sql_query = ask_gemini_for_sql(model, question, columns)
 
             st.write(" **Generated SQL Query:**")
-            st.text_area("Generated SQL Query:", value=sql_query, height=200)
-
+            st.code(sql_query)
 
             # 2️ Run SQL on SQLite
             cursor = conn.execute(sql_query)
