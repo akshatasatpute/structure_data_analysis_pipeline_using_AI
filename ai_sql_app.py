@@ -135,7 +135,8 @@ if uploaded:
             sql_query = ask_gemini_for_sql(model, question, columns)
 
             st.write(" **Generated SQL Query:**")
-            st.code(sql_query)
+            st.text_area("Generated SQL Query:", value=sql_query, height=200)
+
 
             # 2️ Run SQL on SQLite
             cursor = conn.execute(sql_query)
