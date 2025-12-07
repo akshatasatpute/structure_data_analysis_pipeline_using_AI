@@ -28,24 +28,26 @@ def ask_gemini_for_sql(model, question, columns, table_name="data"):
     created from a CSV file. You MUST respond with ONLY a single valid SQLite SQL query
     that can be executed directly, and NOTHING else.
 
-    Rules:
-    - Use the table name: {table_name}
-    - Use only columns that exist in the schema.
-    - Internally think through and generate 3 candidate SQL queries.
-    - Evaluate them for correctness, performance, and efficiency in SQLite.
+    INTERNAL STEPS (DO NOT REVEAL TO THE USER):
+    - Think through at least 3 possible SQL query options.
+    - Compare them for correctness, efficiency, and performance.
     - Select the single most optimized SQL query.
-    - Do not include explanations, comments, or backticks.
-    - Do not do multi-statement queries; a single SELECT is preferred.
-    - If aggregation is needed, use proper GROUP BY.
-    - If the question is ambiguous, make a reasonable assumption and encode it in SQL.
-    Remember: reply with ONLY the final optimized SQL query, nothing else.
+    - DO NOT show your reasoning, DO NOT output analysis, DO NOT output candidates.
+
+    OUTPUT RULES:
+    - Output ONLY the final optimized SQL query.
+    - Do NOT include explanations, comments, markdown, backticks, or extra text.
+    - The output must begin with the keyword SELECT.
+    - Produce exactly one single-statement SELECT query.
+    - Use only existing columns.
+    
 
     Table name: {table_name}
     Columns: {columns}
 
     User question: {question}
 
-    Return ONLY the SQL query, nothing else.
+    Remember: reply with ONLY the final optimized SQL query, nothing else.
     """
     resp = model.generate_content(prompt)
     sql = resp.text.strip()
